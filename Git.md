@@ -40,11 +40,15 @@ $ git tag -a v1.0
 #### store
 `git config --global credential.helper store`
 
-#### avoid merge commits
+#### Avoid merge commits
 `$ git config --global branch.autosetuprebase always`
 
-#### set remote ip 
+#### Set remote ip 
 `git remote set-url origin user@ip-address:/git/project`
+
+#### Switch to SSH
+
+`git remote set-url origin git@github.com:EinWTW/SummaryDayByDay.git`
 
 #### Revert changes to modified files
 git reset --hard
@@ -53,7 +57,7 @@ git reset --hard
  (`-f` is `force`, `-d` is `remove directories`)
 
 `git clean -fd`
-# overwrite local change
+#### Overwrite local change
 git fetch --all
 git reset --hard origin/master
 
@@ -71,47 +75,54 @@ git push origin HEAD
 
 -------------------------------------------------
 git checkout feature-8
+
 git pull origin master
-------------------------------------------------
+
 //remember pass
+
 $ git config credential.helper store
-------------------------------------------------
+
 $ git checkout -b kafka-debug
 $ git checkout kafka-debug
 $ git add -A
 $ git commit
+
 $ git push --set-upstream origin kafka-debug
-------------------------------------------------
+
 $ git checkout master
 $ git pull
 $ sudo git fetch origin master
 $ sudo git rebase -i origin/master
-# Squash commits, fix up commit messages etc.
+#### Squash commits, fix up commit messages etc.
 $ git add -A
 $ git commit -m "log by vk"
+
 $ git push origin master
--------------------------------------------------
+
 git stash
 git stash list
+
 git stash pop
--------------------------------------------------
+
 ### undo add .
 git reset
 ### undo last commit
 git reset --soft HEAD~1
--------------------------------------------------
+
 git tag 0427
 git tag
+
 git push --tags
--------------------------------------------------
+
 git push
 git pull
 git rebase
 -------------------------------------------------
 vim .gitignore 
 #.idea/
+
 git update-index --assume-unchanged .idea/
--------------------------------------------------
+
 $ git init
 $ git status
 & git add . && git add -u .
