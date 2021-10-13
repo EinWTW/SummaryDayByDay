@@ -2,7 +2,10 @@
 
 # Linux Commands
 
+
+
 #### check listening port ####
+
 `$ ps auxww`
 `$ ps aux | grep` 
 `$ ps [pid]`
@@ -32,6 +35,10 @@
 `$ netstat -ao | find "8443"`
 
 `$ nc localhost 5500`
+
+
+
+Lsof obtains data about open UNIX dialect files by reading the kernel's proc structure information, following it to the related user structure, then reading the open file structures stored (usually) in the user structure. Typically lsof uses the kernel memory devices, /dev/kmem, /dev/mem, etc. to read kernel data.
 
 #### Kill ps
 
@@ -165,7 +172,7 @@ To get: tar.gz
 
 
 
-
+#### ssh
 
 #################### ssh AWS ###################
 ssh-keygen -t rsa -b 2048
@@ -174,12 +181,12 @@ sudo shutdown -P now
 sudo poweroff
 sudo halt
 
-ssh ubuntu@1n10.node.org
-sudo scp -i ~/.ssh/id_rsa index.html console.css console.js ubuntu@domain:/home/ubuntu/projects/src//public/
-ssh ubuntu@103.11.89.179 -v ##debug
-ssh ubuntu@peer0.org1
+
+sudo scp -i ~/.ssh/id_rsa index.html console.css console.js ubuntu@node:/home/ubuntu/projects/src//public/
+ssh ubuntu@node -v ##debug
 
 --delete
+
 ##################### gen rsa ##########################
 openssl genrsa -out private.pem 4096
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
@@ -314,3 +321,14 @@ if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
     peer_single="${BASH_REMATCH[1]}"
     org_single="${BASH_REMATCH[2]}"
 
+#### pipe-max-size
+
+id
+
+id -u
+
+location for tmpfs
+
+/dev/shm
+
+vim /proc/sys/fs/pipe-max-size
