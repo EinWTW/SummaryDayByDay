@@ -237,14 +237,13 @@ netstat -n | grep -i 7051 | grep -i time_wait | wc -l
 sudo tar -xvf go1.10.1.linux-amd64.tar.gz
 sudo mv go /usr/local
 
-
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/Projects/aidb
+export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
-	
+
 #### cron job 
-	
+
 0 1 ? * MON-FRI *
 
 ####  letsencrypt 
@@ -292,7 +291,7 @@ ssh ubuntu@node -v ##debug
 --delete
 
 ####  gen rsa 
-	
+
 openssl genrsa -out private.pem 4096
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 
@@ -300,18 +299,18 @@ openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 -----END PUBLIC KEY-----`)
 
 ####  vgo
-	
+
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 source ~/.profile
 	
 #### file discriptor test
-	
+
 ulimit -n 20480
 go run tps.go put https://localhost:8080/api/v1 1450 200
 
 ####  api-gateway
-	
+
 sudo pkill api-gateway
 touch /etc/blockchain/debug exists
 
@@ -319,7 +318,23 @@ touch /etc/blockchain/debug exists
 export PG_CLIENT_CONN_POOL_SIZE=400
 export PG_LOG_LEVEL=debug
 
-#### test deploy
+
+
+#### lockfile
+
+sudo apt-get install procmail
+
+#### jq
+
+sudo apt install jq
+
+#### softlink
+
+ln -s /home/ubuntu/testspace/src/sdk/go/ sdk-go
+
+
+
+#### python3-pip
 
 sudo apt-get install python3-pip python-pip
 pip install pycrypto
@@ -329,12 +344,7 @@ sudo pip install selenium
 sudo pip3 install selenium
 pip3 install requests
 
-#lockfile
-sudo apt-get install procmail
-
-sudo apt install jq
-
-ln -s /home/ubuntu/testspace/parallelguard-test/src/sdk/go/ parallelguard-sdk-go
+#### test deploy
 
 sudo systemctl status apache2
 sudo apt install php libapache2-mod-php
@@ -346,16 +356,11 @@ sudo a2enmod ssl
 sudo systemctl restart apache2
 sudo mkdir /etc/apache2/ssl
 
-###To disable apache2 simply type:
+To disable apache2 simply type: 
+
 sudo update-rc.d apache2 disable
-###To remove apache2 simply type:
+
+To remove apache2 simply type:
+
 sudo update-rc.d -f  apache2 remove
 
-sdk
-rsa-sys
-ln -s aidb.py
-
-php php-curl
-go/
-
-sudo apt-get install php7.2-curl
