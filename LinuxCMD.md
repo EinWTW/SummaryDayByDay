@@ -213,6 +213,72 @@ location for tmpfs
 vim /proc/sys/fs/pipe-max-size
 
 
+####  git 
+
+git remote update
+git status -uno
+//remember pass
+$ git config credential.helper store
+git config --global credential.helper 'cache --timeout 7200'
+
+####  vim 
+
+:set number
+:s/^/new text /	Insert "new text " at the beginning of the line.
+:s/$/ new text/	Append " new text" to the end of the line.
+
+####  port 
+
+netstat -tulnp | grep <port no>
+lsof -i:3000
+netstat -ptn | grep EST | wc -l
+netstat -n | grep -i 7051 | grep -i time_wait | wc -l
+
+sudo tar -xvf go1.10.1.linux-amd64.tar.gz
+sudo mv go /usr/local
+
+
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Projects/aidb
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+	
+#### cron job 
+	
+0 1 ? * MON-FRI *
+
+####  letsencrypt 
+
+sudo apt-get install letsencrypt
+sudo -H ./letsencrypt-auto certonly --standalone -d server2.freeddns.org -d www.server2.freeddns.org
+sudo -H ./letsencrypt-auto certonly --standalone -d 1n6.ddnsfree.com -d www.1n6.ddnsfree.com
+
+sudo wget https://dl.eff.org/certbot-auto -O /usr/sbin/certbot-auto
+sudo certbot-auto certonly --standalone -d 1n6.ddnsfree.com -d www.1n6.ddnsfree.com
+sudo mkdir -p /etc/hyperledger/certs
+sudo cp /etc/letsencrypt/live/1n6.ddnsfree.com/fullchain.pem /etc/hyperledger/certs/server.pem
+sudo cp /etc/letsencrypt/live/1n6.ddnsfree.com/privkey.pem /etc/hyperledger/certs/server.key
+sudo chmod a+r /etc/hyperledger/certs/server.key
+
+sudo chown -R ubuntu.ubuntu certs
+
+#### Tools
+
+wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
+
+which python
+export PATH=~/.local/bin:$PATH
+
+ mkdir -p go/src/github.com/project
+~/go/src/github.com/project$ ln -s ~/projects/db/src/sdk/go ./db-sdk-go
+
+
+####  pattern match
+if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
+    peer_single="${BASH_REMATCH[1]}"
+    org_single="${BASH_REMATCH[2]}"
+
+
 
 #### ssh
 
@@ -225,44 +291,36 @@ ssh ubuntu@node -v ##debug
 
 --delete
 
-##################### gen rsa ##########################
+####  gen rsa 
+	
 openssl genrsa -out private.pem 4096
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 
 	publicKeyPem := []byte(`-----BEGIN PUBLIC KEY-----
-
-MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAy8k7sgUlv2n7FVJtn+sX
-38CYYRSpahVGkS43JyMuRPkplAAlD+xEHe08yTDHvhBHIOfTwpp1xRY5HmGFAtB8
-fEmjmxIVx2cTYic6rMxa7FrfKgGXzTWQEaCouuOQ8WO41yzYs9PRxNJDWileVD2j
-SULAg3lROtGpAQ/67SCEXceNZf9pqrzzuYice3zZutMDmdVHy8gTEED5bcRaevJ2
-JhWXJxk0XaqPDWzmbbHx0lz0zvrlV4mvzkbUUHsnPWtAJxU7so43TDMc6QryO6Pw
-8B3Iivp8+fDvfVUv3tY4rt4G1rUNEM33Ssl8EdEzHMTQ/3i4FrESsBTOHo2yWUxZ
-fhQU2h9fbzgSuIofHM48XXgEHPnnWCt58ttMsNu0D4YC0BpSiwQXCKSB6TuvJ+tp
-9mlXtCxxjge4vf0GE8P9LUhKB0nZuXNyJWCIIWMNsXXGvixhAGaSQOsFHkiTw2iH
-ruQPFc4WplYcauvEcFzxb/pw51OEtAy99+MORdr6d73rzDVAFQwO0x64VSJeGVyV
-vJxM3Ll2iny0/hSaOXnvUHKyqZmI2Yi6rQwlbh12h24jFB1OqrH24QXt2acxp7nZ
-0J+Zkz6b3nH1zqSjx0m8+Sisj2RHaxz4sOI/sBhp2FVIUFsxri+d2WRgiTZM6UPo
-4ErguLY2hMVuVdG3Br4jzTkCAwEAAQ==
 -----END PUBLIC KEY-----`)
 
-##################### vgo
+####  vgo
+	
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 source ~/.profile
-
-##################### test
+	
+#### file discriptor test
+	
 ulimit -n 20480
 go run tps.go put https://localhost:8080/api/v1 1450 200
 
-####################   api-gateway    ######################
+####  api-gateway
+	
 sudo pkill api-gateway
-touch /etc/parallelchain/debug exists
+touch /etc/blockchain/debug exists
 
 ----config.user.sh
-export PGUARD_CLIENT_CONN_POOL_SIZE=400
-export PGUARD_LOG_LEVEL=debug
+export PG_CLIENT_CONN_POOL_SIZE=400
+export PG_LOG_LEVEL=debug
 
-#################### test deploy  ###################
+#### test deploy
+
 sudo apt-get install python3-pip python-pip
 pip install pycrypto
 pip3 install pycrypto
@@ -301,62 +359,3 @@ php php-curl
 go/
 
 sudo apt-get install php7.2-curl
-################## git ###################
-git remote update
-git status -uno
-//remember pass
-$ git config credential.helper store
-git config --global credential.helper 'cache --timeout 7200'
-
-#################### vim #################### 
-:set number
-:s/^/new text /	Insert "new text " at the beginning of the line.
-:s/$/ new text/	Append " new text" to the end of the line.
-
-#################### port ##########################
-netstat -tulnp | grep <port no>
-lsof -i:3000
-netstat -ptn | grep EST | wc -l
-netstat -n | grep -i 7051 | grep -i time_wait | wc -l
-
-sudo tar -xvf go1.10.1.linux-amd64.tar.gz
-sudo mv go /usr/local
-
-
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/Projects/aidb
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-###################### cron job #######################
-0 1 ? * MON-FRI *
-
-####################### letsencrypt #########################
-sudo apt-get install letsencrypt
-sudo -H ./letsencrypt-auto certonly --standalone -d server2.freeddns.org -d www.server2.freeddns.org
-sudo -H ./letsencrypt-auto certonly --standalone -d 1n6.ddnsfree.com -d www.1n6.ddnsfree.com
-
-sudo wget https://dl.eff.org/certbot-auto -O /usr/sbin/certbot-auto
-sudo certbot-auto certonly --standalone -d 1n6.ddnsfree.com -d www.1n6.ddnsfree.com
-sudo mkdir -p /etc/hyperledger/certs
-sudo cp /etc/letsencrypt/live/1n6.ddnsfree.com/fullchain.pem /etc/hyperledger/certs/server.pem
-sudo cp /etc/letsencrypt/live/1n6.ddnsfree.com/privkey.pem /etc/hyperledger/certs/server.key
-sudo chmod a+r /etc/hyperledger/certs/server.key
-
-sudo chown -R ubuntu.ubuntu certs
-
-################### Tools ###################
-
-wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
-
-which python
-export PATH=~/.local/bin:$PATH
-
- mkdir -p go/src/github.com/project
-~/go/src/github.com/project$ ln -s ~/projects/db/src/sdk/go ./db-sdk-go
-
-
-################################
-if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
-    peer_single="${BASH_REMATCH[1]}"
-    org_single="${BASH_REMATCH[2]}"
-
