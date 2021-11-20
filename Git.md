@@ -63,7 +63,20 @@ git reset --hard origin/master
 
 git reset HEAD ../tests/
 git log
---------------------merge master into branch--------
+
+#### work in branch
+
+git fetch
+
+git checkout existing-branch
+
+git branch
+
+git switch devbranch
+
+#### merge master into branch--------
+
+git add
 git commit
 git pull --rebase
 git merge origin/master
@@ -104,9 +117,9 @@ git stash list
 
 git stash pop
 
-### undo add .
+#### undo add .
 git reset
-### undo last commit
+#### undo last commit
 git reset --soft HEAD~1
 
 git tag 0427
@@ -116,7 +129,7 @@ git push --tags
 
 git push
 git pull
-git rebase
+
 -------------------------------------------------
 vim .gitignore 
 #.idea/
@@ -149,3 +162,15 @@ $ git log
 $ git show *
 $ git diff 
 $ git diff -w / git show -w //This makes the diff algorithm ignore whitespace changes
+
+
+
+#### Ensure submodule loaded properly
+
+```
+git submodule update --init --recursive
+```
+
+```
+git config pull.rebase false
+```

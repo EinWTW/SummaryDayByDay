@@ -16,6 +16,8 @@ sudo systemctl start docker
 //
 sudo screen -ls
 //
+
+```
 docker ps
 docker ps --filter ancestor=hyperledger/fabric-peer:latest --format '{{.Names}}'
 docker inspect --format="{{.LogPath}}" peer0.org1.example.com
@@ -27,6 +29,7 @@ docker logs -f orderer.example.com
 
 docker exec -it cli bash
 docker exec -it peer0.org2.dtl1.pg.digital-transaction.org bash
+```
 
 //
 

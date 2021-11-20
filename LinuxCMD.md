@@ -332,3 +332,23 @@ location for tmpfs
 /dev/shm
 
 vim /proc/sys/fs/pipe-max-size
+
+#### no-pass
+
+```
+echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
+```
+
+#### sed
+
+###### Replace a line
+
+sed -i '/protected-mode yes/c protected-mode no' test.txt 
+
+###### Insert after a line
+
+sed -i '/protected-mode yes/a protected-mode no' /etc/redis/redis.conf
+
+###### Comment a line
+
+sed -i '/^bind 127\.0\.0\.1 ::1$/s/^/#/' /etc/redis/redis.conf
