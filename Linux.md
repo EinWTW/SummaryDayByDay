@@ -2,6 +2,12 @@
 
 # Linux Commands
 
+#### check system version
+
+```
+lsb_release -a
+```
+
 
 
 #### check listening port ####
