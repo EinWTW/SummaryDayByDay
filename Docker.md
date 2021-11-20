@@ -24,11 +24,11 @@ docker inspect --format="{{.LogPath}}" peer0.org1.example.com
 docker inspect net_peer0.org1.example.com
 
 
-docker logs peer0.org1.aahk.aidb.digital-transaction.org
+docker logs peer0.org1
 docker logs -f orderer.example.com
 
 docker exec -it cli bash
-docker exec -it peer0.org2.dtl1.pg.digital-transaction.org bash
+docker exec -it peer0.org2 bash
 ```
 
 //
@@ -72,25 +72,23 @@ apt install net-tools
 
 /bin/bash -c './scripts/script.sh mychannel'
 
-
 docker logs -f orderer1.example.com
-peer channel create -o orderer0.example.com:7050 -c aidbc -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+peer channel create -o orderer0.example.com:7050 -c aidbc -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/bitbucket.org/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
-peer channel create -o orderer1.example.com:7050 -c aidbc -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+peer channel create -o orderer1.example.com:7050 -c aidbc -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/bitbucket.org/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 peer chaincode invoke -o orderer0.example.com:7050 -n aidbcc -c '{"Args":["get","test/try"]}'
-peer chaincode invoke -o orderer0.example.com:7050 --tls true --cafile /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C aidbc -n aidbcc --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["get", "test/try"]}'
+peer chaincode invoke -o orderer0.example.com:7050 --tls true --cafile /opt/gopath/src/bitbucket.org/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C aidbc -n aidbcc --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/bitbucket.org/mychain/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["get", "test/try"]}'
 
-peer chaincode invoke -o orderer1.example.com:7050 --tls true --cafile /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C aidbc -n aidbcc --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/bitbucket.org/digital-transaction/mychain/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["get", "test/try"]}'
+peer chaincode invoke -o orderer1.example.com:7050 --tls true --cafile /opt/gopath/src/bitbucket.org/mychain/peer/crypto/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C aidbc -n aidbcc --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/bitbucket.org/mychain/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["get", "test/try"]}'
 
 docker pull hyperledger/fabric-kafka:0.4.10
-docker login -u dtlengineers
+docker login -u engineers
 docker tag hyperledger/fabric-kafka:0.4.10 mychaindev/kafka:0.4.10
 docker push mychaindev/kafka:0.4.10
 
-
 docker pull hyperledger/fabric-zookeeper:0.4.10
-docker login -u dtlengineers
+docker login -u engineers
 docker tag hyperledger/fabric-zookeeper:0.4.10 mychaindev/zookeeper:0.4.10
 docker push mychaindev/zookeeper:0.4.10
 

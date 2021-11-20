@@ -54,7 +54,7 @@ If the result is as expected. Go with:
 pkill -f [part_of_a_command_name]
 ```
 
-`$ kill -9 pid`
+`$ killall -9 command`
 
 #### Exit Kill
 
@@ -170,6 +170,48 @@ To get: tar.gz
 
 
 
+#### no-pass
+
+```
+echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
+```
+
+#### sed
+
+###### Replace a line
+
+sed -i '/protected-mode yes/c protected-mode no' test.txt 
+
+###### Insert after a line
+
+sed -i '/protected-mode yes/a protected-mode no' /etc/redis/redis.conf
+
+###### Comment a line
+
+sed -i '/^bind 127\.0\.0\.1 ::1$/s/^/#/' /etc/redis/redis.conf
+
+#### shutdown
+
+```
+sudo shutdown -P now
+sudo poweroff
+sudo halt
+```
+
+
+
+#### pipe-max-size
+
+id
+
+id -u
+
+location for tmpfs
+
+/dev/shm
+
+vim /proc/sys/fs/pipe-max-size
+
 
 
 #### ssh
@@ -177,10 +219,6 @@ To get: tar.gz
 #################### ssh AWS ###################
 ssh-keygen -t rsa -b 2048
 ls ~/.ssh/
-sudo shutdown -P now
-sudo poweroff
-sudo halt
-
 
 sudo scp -i ~/.ssh/id_rsa index.html console.css console.js ubuntu@node:/home/ubuntu/projects/src//public/
 ssh ubuntu@node -v ##debug
@@ -307,6 +345,7 @@ sudo chmod a+r /etc/hyperledger/certs/server.key
 sudo chown -R ubuntu.ubuntu certs
 
 ################### Tools ###################
+
 wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 
 which python
@@ -321,34 +360,3 @@ if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
     peer_single="${BASH_REMATCH[1]}"
     org_single="${BASH_REMATCH[2]}"
 
-#### pipe-max-size
-
-id
-
-id -u
-
-location for tmpfs
-
-/dev/shm
-
-vim /proc/sys/fs/pipe-max-size
-
-#### no-pass
-
-```
-echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
-```
-
-#### sed
-
-###### Replace a line
-
-sed -i '/protected-mode yes/c protected-mode no' test.txt 
-
-###### Insert after a line
-
-sed -i '/protected-mode yes/a protected-mode no' /etc/redis/redis.conf
-
-###### Comment a line
-
-sed -i '/^bind 127\.0\.0\.1 ::1$/s/^/#/' /etc/redis/redis.conf
