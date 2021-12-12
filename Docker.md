@@ -15,7 +15,34 @@ sudo systemctl start docker.service
 sudo systemctl start docker
 //
 sudo screen -ls
-//
+
+
+
+#### Start container
+
+```
+docker start -a -i `docker ps -q -l`
+```
+
+Explanation:
+
+`docker start` start a container (requires name or ID)
+`-a` attach to container
+`-i` interactive mode
+`docker ps` List containers
+`-q` list only container IDs
+`-l` list only last created container
+
+Restart an existing container after it exited and your changes are still there.
+
+```bash
+docker start  `docker ps -q -l` # restart it in the background
+docker attach `docker ps -q -l` # reattach the terminal & stdin
+```
+
+
+
+#### List docker process/log
 
 ```
 docker ps
@@ -31,7 +58,9 @@ docker exec -it cli bash
 docker exec -it peer0.org2 bash
 ```
 
-//
+
+
+#### Remove container/image/volume
 
 ```bash
 docker rmi -f $(docker images -qa)
@@ -40,28 +69,6 @@ docker rm -f $(sudo -S docker ps -aq  --filter ancestor=redis) #Name
 docker volume ls
 docker volume prune -f
 ```
-
-~~
-
-restart an existing container after it exited and your changes are still there.
-
-```bash
-docker start  `docker ps -q -l` # restart it in the background
-docker attach `docker ps -q -l` # reattach the terminal & stdin
-```
-
-```
-docker start -a -i `docker ps -q -l`
-```
-
-Explanation:
-
-`docker start` start a container (requires name or ID)
-`-a` attach to container
-`-i` interactive mode
-`docker ps` List containers
-`-q` list only container IDs
-`-l` list only last created container
 
 //
 apt update

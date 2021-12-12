@@ -56,7 +56,9 @@ lsb_release -a
 
 `$ nc localhost 5500`
 
-
+```
+ls /proc | less 
+```
 
 Lsof obtains data about open UNIX dialect files by reading the kernel's proc structure information, following it to the related user structure, then reading the open file structures stored (usually) in the user structure. Typically lsof uses the kernel memory devices, /dev/kmem, /dev/mem, etc. to read kernel data.
 
@@ -77,6 +79,16 @@ pkill -f [part_of_a_command_name]
 `$ killall -9 command`
 
 
+
+#### Run background
+
+```
+nuhup ./script.sh &
+```
+
+```
+nohup [command] & disown
+```
 
 #### Exit Kill
 

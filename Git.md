@@ -64,6 +64,21 @@ git reset --hard origin/master
 git reset HEAD ../tests/
 git log
 
+#### Create a new branch
+
+To create a new branch and switch to it at the same time, you can run the `git checkout` command with the `-b` switch:
+
+```console
+git checkout -b newbranch
+```
+
+This is shorthand for:
+
+```console
+$ git branch newbranch
+$ git checkout newbranch
+```
+
 #### work in branch
 
 git fetch
