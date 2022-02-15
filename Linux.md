@@ -8,7 +8,24 @@
 lsb_release -a
 ```
 
+#### Check DNS/Gateway
 
+```
+# DNS servers
+systemd-resolve --status
+# Gateway, default route
+ip r | grep ^def
+# ip, netmask
+ifconfig
+```
+
+#### Ping
+
+ping -c 1 192.168.20.3
+
+ip link show
+
+ip r s
 
 #### check listening port ####
 
@@ -123,6 +140,10 @@ command1
 command2
 set -e
 ```
+
+- set -e: exits if a command fails
+- set -u: errors if an variable is referenced before being set
+- set -x: shows the commands that get run
 
 #### WC
 
@@ -367,7 +388,7 @@ if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
 
 #### ssh
 
-#################### ssh AWS ###################
+genrate keypairs
 ssh-keygen -t rsa -b 2048
 ls ~/.ssh/
 
@@ -376,7 +397,13 @@ ssh ubuntu@node -v ##debug
 
 --delete
 
+install ssh
 
+```
+sudo apt install openssh-server 
+sudo service ssh status 
+ssh localhost
+```
 
 ####  gen rsa 
 

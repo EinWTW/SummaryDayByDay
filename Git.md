@@ -1,10 +1,48 @@
 # Git
 
-`$ sudo apt-get install git-all`
+###### Install
 
-###### ##To fix upstart
+```
+sudo apt-get install git-all
+```
 
-`$ sudo apt-get purge runit git-daemon-run`
+###### To fix upstart
+
+```
+sudo apt-get purge runit git-daemon-run
+```
+
+
+
+#### Git fork branch
+
+```
+git checkout -b veritashs-experiment v0.2.2
+
+git push --set-upstream origin veritashs-experiment
+
+git push origin HEAD:veritashs-experiment
+```
+
+
+
+###### rename local branch
+
+```
+git branch -m veritashotstuff experiment
+```
+
+###### delete remote branch
+
+```
+git push origin --delete veritashs-experiment
+```
+
+
+
+
+
+
 
 #### tag
 
@@ -26,11 +64,22 @@ $ git tag --list 'v-*'
 
 ```
 # creat annotated tag
-$ git tag -a v1.0
+$ git tag -a v1.0 -m ""
+
+git show v1.0
+git push origin v1.0
+```
+
+```
+delete a remote tag
+git push --delete origin v1.2.1
+
 ```
 
 
+
 #### config
+
 `$ git config --list`
 
 `$ git config --global user.name "myname"`
@@ -64,7 +113,9 @@ git reset --hard origin/master
 git reset HEAD ../tests/
 git log
 
-#### Create a new branch
+#### Branch
+
+###### Create a new branch
 
 To create a new branch and switch to it at the same time, you can run the `git checkout` command with the `-b` switch:
 
@@ -79,7 +130,7 @@ $ git branch newbranch
 $ git checkout newbranch
 ```
 
-#### work in branch
+###### work in branch
 
 git fetch
 
@@ -186,6 +237,6 @@ $ git diff -w / git show -w //This makes the diff algorithm ignore whitespace ch
 git submodule update --init --recursive
 ```
 
-```
+```cdm
 git config pull.rebase false
 ```
