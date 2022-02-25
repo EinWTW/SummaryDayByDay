@@ -17,7 +17,20 @@ systemd-resolve --status
 ip r | grep ^def
 # ip, netmask
 ifconfig
+
+#192.168.50.1, 
+ping 8.8.8.8
+#DNS 8.8.8.8,8.8.4.4
+# restart
+sudo service NetworkManager restart
+# Unit network-manager.service not found.
+sudo apt install network-manager
+
+#!!!!!!!
+sudo cp resolv.conf.forticlient.backup resolv.conf
 ```
+
+
 
 #### Ping
 
@@ -180,6 +193,16 @@ wc -l
 `$ sudo gparted`
 
 `$ sudo fdisk -l`
+
+#### Disk usage
+
+```
+df -h
+
+du -h
+
+du -hd 1
+```
 
 
 
@@ -403,6 +426,7 @@ install ssh
 sudo apt install openssh-server 
 sudo service ssh status 
 ssh localhost
+ssh -v tianwen@enigma.d2.comp.nus.edu.sg
 ```
 
 ####  gen rsa 
