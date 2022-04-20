@@ -2,11 +2,85 @@
 
 # Linux Commands
 
+##### init
+
+CPU reset  - Firmware Loader - Kernel_start() - '/bin/init' - termi/exception handle
+
+pstree
+
+##### fork
+
+create a state machine
+
+##### execve
+
+reset a state machine(argv, envp)
+
+execve("/bin/bash", "-c", "env", NULL)
+
+##### exit
+
+destroy state machine
+
+exit(0): atexit
+
+_exit(0): exit_group
+
+syscall(SYS_exit, 0): terminate the current thread
+
+##### xeyes
+
+##### strace
+
+--observe program running
+
+gcc strace
+
+#### .bashrc
+
+```
+# FORMAT
+HISTTIMEFORMAT="%Y-%M-%D %T"
+
+# GO ENV
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# Go 1.16 requires use of Go modules by default, to still allow working as before
+#export GO111MODULE=off
+export GO111MODULE=on
+#export GOFLAGS=-mod=readonly
+export GOFLAGS=-mod=mod
+#export GOFLAGS=-mod=vendor
+
+# solc
+PATH=$PATH:~/.local/bin
+# solana
+export PATH="/home/tianwen/.local/share/solana/install/active_release/bin:$PATH"
+
+# My alias:
+alias cdmy="cd $HOME/go/src/github.com/EinWTW && ll"
+alias ssh-enigma="ssh tianwen@enigma.d2.comp.nus.edu.sg"
+alias ssh-sbip="ssh ubuntu@172.25.122.22 -v"
+. "$HOME/.cargo/env"
+
+```
+
+
+
 #### check system version
 
 ```
 lsb_release -a
 ```
+
+```
+lspci
+ls --color
+ls -l --color
+```
+
+
 
 #### Check DNS/Gateway
 
@@ -28,6 +102,56 @@ sudo apt install network-manager
 
 #!!!!!!!
 sudo cp resolv.conf.forticlient.backup resolv.conf
+```
+
+#### Reboot
+
+shutdown command is specify a time of shutdown/reboot,
+
+reboot at 1:30pm 
+
+```
+sudo shutdown -r 13:30
+```
+
+to reboot in 40 minutes
+
+```
+sudo shutdown -r +40
+```
+
+#### Tips
+
+```
+history
+!number (history command id)
+!!
+
+Ctrl -
+Ctrl shift +
+Ctrl l (=clear)
+
+Ctrl+Z
+fg
+pushd
+popd
+
+truncate s 0 filename # empty file
+some output | column -t # display output in col
+tail -f -n 50 filename
+
+cmd1 && cmd2
+cmd1; cmd2
+```
+
+brew
+
+```
+git clone https://github.com/Homebrew/linuxbrew.git ~/.linuxbrew
+
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 ```
 
 
@@ -91,6 +215,21 @@ ls /proc | less
 ```
 
 Lsof obtains data about open UNIX dialect files by reading the kernel's proc structure information, following it to the related user structure, then reading the open file structures stored (usually) in the user structure. Typically lsof uses the kernel memory devices, /dev/kmem, /dev/mem, etc. to read kernel data.
+
+#### ps
+
+```
+pstree
+
+ps -Flww -p 1700
+
+pidstat -p 101754 -d 
+pidstat -p 101754 3
+
+cd /proc/1700
+ls
+cat /proc/1700/status
+```
 
 #### Kill ps
 
@@ -165,6 +304,18 @@ count lines of output
 ```sh
 wc -l
 ```
+
+#### printf
+
+line buffer: \n
+
+full buffer (page): pipeline
+
+cash
+
+setbuf(stdout, NULL)
+
+wait(NULL)
 
 #### Mem ####
 
@@ -412,8 +563,12 @@ if [[ $SINGLE_NODE =~ peer([[:digit:]]+).org([[:digit:]]+) ]]; then
 #### ssh
 
 genrate keypairs
+
+```
+ssh-keygen
 ssh-keygen -t rsa -b 2048
 ls ~/.ssh/
+```
 
 sudo scp -i ~/.ssh/id_rsa index.html console.css console.js ubuntu@node:/home/ubuntu/projects/src//public/
 ssh ubuntu@node -v ##debug

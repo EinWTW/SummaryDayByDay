@@ -7,8 +7,23 @@ export GOPATH=$HOME/go
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 
+Install
+
+```
+curl -OL https://golang.org/dl/go1.16.15.linux-amd64.tar.gz
+tar -xvf ./go1.16.15.linux-amd64.tar.gz
+
+#export GOROOT=$HOME/local/go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+```
+
+
 
 #### Go 1.16 requires use of Go modules by default, to still allow working as before
+
 ```
 #export GO111MODULE=off
 export GO111MODULE=on
