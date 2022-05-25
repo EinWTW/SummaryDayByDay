@@ -2,6 +2,8 @@
 
 # Linux Commands
 
+#### Linux system
+
 ##### init
 
 CPU reset  - Firmware Loader - Kernel_start() - '/bin/init' - termi/exception handle
@@ -80,30 +82,6 @@ ls --color
 ls -l --color
 ```
 
-
-
-#### Check DNS/Gateway
-
-```
-# DNS servers
-systemd-resolve --status
-# Gateway, default route
-ip r | grep ^def
-# ip, netmask
-ifconfig
-
-#192.168.50.1, 
-ping 8.8.8.8
-#DNS 8.8.8.8,8.8.4.4
-# restart
-sudo service NetworkManager restart
-# Unit network-manager.service not found.
-sudo apt install network-manager
-
-#!!!!!!!
-sudo cp resolv.conf.forticlient.backup resolv.conf
-```
-
 #### Reboot
 
 shutdown command is specify a time of shutdown/reboot,
@@ -152,6 +130,143 @@ git clone https://github.com/Homebrew/linuxbrew.git ~/.linuxbrew
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+```
+
+#### 
+
+#### DNS/Gateway
+
+```
+# DNS servers
+systemd-resolve --status
+# Gateway, default route
+ip r | grep ^def
+# ip, netmask
+ifconfig
+
+
+#192.168.50.1, 
+ping 8.8.8.8
+#DNS 8.8.8.8,8.8.4.4
+# restart
+sudo service NetworkManager restart
+# Unit network-manager.service not found.
+sudo apt install network-manager
+
+#!!!!!!!
+sudo cp resolv.conf.forticlient.backup resolv.conf
+
+# nslookup
+nslookup 172.25.121.135
+host 172.25.121.135
+dig -x 172.25.121.135
+
+ipconfig /flushdns
+
+```
+
+r-24-123-25-172.d1.comp.nus.edu.sg
+
+remove "resolvconf" and then install:
+
+```
+sudo apt-get remove --purge resolvconf && sudo apt-get install resolvconf
+
+systemd-resolve --status
+vim /etc/resolv.conf
+
+systemctl restart resolvconf
+resolvectl status
+sudo iptables -I INPUT -s localhost -d 127.0.0.53 -j ACCEPT
+```
+
+To release the current IP address:
+
+```
+$ sudo dhclient -r
+```
+
+To obtain a fresh lease:
+
+```
+$ sudo dhclient 
+```
+
+
+
+```
+sudo ifconfig wlp9s0 down
+
+sudo ifconfig wlp9s0 up
+```
+
+
+
+```
+netstat -rn
+
+
+> Kernel IP routing table
+
+> Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+
+> 0.0.0.0         172.26.186.1    0.0.0.0         UG        0 0          0 enp0s31f6
+
+> 169.254.0.0     0.0.0.0         255.255.0.0     U         0 0          0 enp0s31f6
+
+> 172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0
+
+> 172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 br-59a163f3f807
+
+> 172.26.186.0    0.0.0.0         255.255.254.0   U         0 0          0 enp0s31f6
+
+> 192.168.20.0    0.0.0.0         255.255.255.0   U         0 0          0 ovs-br1
+
+
+172.18.0.0 subnet that clashes with our DNS.
+Note that 172.16.0.0/12 is routeable in N. 
+192.168.0.0/16 is also routeable in S. 
+Do not use these subnets.
+
+```
+
+###### delete default route
+
+```
+sudo ip route del default
+```
+
+#### iptable
+
+```
+ip addr show enp0s3
+
+ip route show
+
+ip route list
+
+route -n 
+```
+
+###### ip route del
+
+```
+sudo ip route del 172.18.0.0/16
+sudo ip route del default
+sudo ip route del 10.0.2.15 via 192.168.43.223 dev enp0s3
+```
+
+###### ifdown & ifup
+
+```
+sudo ifdown enp0s3 && sudo ifup enp0s3
+```
+
+add iproute2 to image and expose net capability
+
+```
+#Dockerfile
+RUN apk add iproute2
 ```
 
 
@@ -437,6 +552,15 @@ sed -i '/protected-mode yes/a protected-mode no' /etc/redis/redis.conf
 ###### Comment a line
 
 sed -i '/^bind 127\.0\.0\.1 ::1$/s/^/#/' /etc/redis/redis.conf
+
+
+
+#### less
+
+```
+# go to the end of the file
+less -G file
+```
 
 
 

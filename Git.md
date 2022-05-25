@@ -12,7 +12,34 @@ sudo apt-get install git-all
 sudo apt-get purge runit git-daemon-run
 ```
 
+#### Branch
 
+###### Create a new branch
+
+To create a new branch and switch to it at the same time, you can run the `git checkout` command with the `-b` switch:
+
+```console
+git checkout -b newbranch
+```
+
+This is shorthand for:
+
+```console
+$ git branch newbranch
+$ git checkout newbranch
+```
+
+###### work in branch
+
+git fetch
+
+git checkout existing-branch
+
+git branch
+
+git switch devbranch
+
+#### 
 
 #### Git fork branch
 
@@ -24,12 +51,23 @@ git push --set-upstream origin veritashs-experiment
 git push origin HEAD:veritashs-experiment
 ```
 
+###### merge branch
+
+```
+git checkout extension1.0
+
+git merge dev
+
+git push
+```
+
 
 
 ###### rename local branch
 
 ```
-git branch -m veritashotstuff experiment
+git branch -m veritashs_experiment veritas
+git push origin HEAD
 ```
 
 ###### delete remote branch
@@ -38,11 +76,57 @@ git branch -m veritashotstuff experiment
 git push origin --delete veritashs-experiment
 ```
 
+###### replace fork repo go module path
 
+```golang
+go mod edit -replace="github.com/relab/hotstuff@v0.2.2=github.com/EinWTW/hotstuff@veritashs-experiment"
+```
 
+replace github.com/wtwinlab/hotstuff@veritashs-experiment => ./veritas_hotstuff/hotstuff
 
+#### submodule
 
+**#** add submodule and define the master branch as the one you want to track 
 
+git submodule add -b master [URL to Git repo]  
+
+git submodule init
+
+```
+git submodule add -b veritas git@github.com:wtwinlab/hotstuff.git
+git submodule add git@github.com:wtwinlab/hotstuff.git
+
+git submodule update --init --recursive
+```
+
+If you want to clone a repository including its submodules you can use the `--recursive` parameter.
+
+```
+git clone --recursive [URL to Git repo]
+```
+
+```
+# update your submodule --remote fetches new commits in the submodules 
+
+# and updates the working tree to the commit described by the branch 
+
+# pull all changes for the submodules
+git submodule update --remote
+```
+
+To remove a submodule called `mymodule` you need to:
+
+- git submodule deinit -f — mymodule
+
+- rm -rf .git/modules/mymodule
+
+- git rm -f mymodule
+
+  ```
+  git submodule deinit -f --all
+  ```
+
+  
 
 #### tag
 
@@ -75,6 +159,8 @@ delete a remote tag
 git push --delete origin v1.2.1
 
 ```
+
+
 
 
 
@@ -112,33 +198,6 @@ git reset --hard origin/master
 
 git reset HEAD ../tests/
 git log
-
-#### Branch
-
-###### Create a new branch
-
-To create a new branch and switch to it at the same time, you can run the `git checkout` command with the `-b` switch:
-
-```console
-git checkout -b newbranch
-```
-
-This is shorthand for:
-
-```console
-$ git branch newbranch
-$ git checkout newbranch
-```
-
-###### work in branch
-
-git fetch
-
-git checkout existing-branch
-
-git branch
-
-git switch devbranch
 
 #### merge master into branch--------
 
