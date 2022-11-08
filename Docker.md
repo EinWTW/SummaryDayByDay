@@ -70,6 +70,34 @@ docker volume ls
 docker volume prune -f
 ```
 
+
+
+#### Docker login
+
+```
+docker login repository_details
+```
+
+
+
+#### Docker Compose 
+
+1. Build the docker container:
+
+   ```
+   docker-compose build
+   ```
+
+2. Run the docker compose stack which includes kafka and zookeeper:
+
+   ```
+   docker-compose down; docker-compose up
+   ```
+
+
+
+
+
 //
 apt update
 apt install net-tools

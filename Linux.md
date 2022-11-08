@@ -98,6 +98,39 @@ to reboot in 40 minutes
 sudo shutdown -r +40
 ```
 
+#### Debugfs
+
+```
+debugfs /dev/hda2
+```
+
+#### Exploit
+
+```
+exploit
+```
+
+#### Task_struct
+
+```
+task_struct
+tasks
+```
+
+#### Rookit
+
+```
+
+```
+
+ava
+
+```
+
+```
+
+
+
 #### Tips
 
 ```
@@ -267,6 +300,21 @@ add iproute2 to image and expose net capability
 ```
 #Dockerfile
 RUN apk add iproute2
+```
+
+#### telnet
+
+```
+telnet 172.25.123.120 7070
+
+```
+
+
+
+#### netstat
+
+```
+netstat -tlnup | grep -i 3306
 ```
 
 
@@ -707,6 +755,23 @@ sudo service ssh status
 ssh localhost
 ssh -v tianwen@enigma.d2.comp.nus.edu.sg
 ```
+
+###### To Fix: 
+
+kex_exchange_identification: read: Connection reset by peer
+
+```
+sudo ufw allow ssh
+sudo ufw allow 22
+```
+
+###### ssh with password
+
+```
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no enigma.d2.comp.nus.edu.sg
+```
+
+
 
 ####  gen rsa 
 

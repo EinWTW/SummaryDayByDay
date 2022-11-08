@@ -185,7 +185,27 @@ git push --delete origin v1.2.1
 
 `git remote set-url origin git@github.com:EinWTW/SummaryDayByDay.git`
 
+
+
+#### Fix SOC network
+
+```
+ssh -T -p 443 git@ssh.github.com
+
+git clone ssh://git@ssh.github.com:443/wtwinlab/Satya.git
+```
+
+To set this in your SSH configuration file, edit the file at `~/.ssh/config`, and add this section:
+
+```
+Host github.com
+Hostname ssh.github.com
+Port 443
+User git
+```
+
 #### Revert changes to modified files
+
 git reset --hard
 #### Remove all untracked files and directories.
 
