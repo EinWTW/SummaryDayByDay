@@ -2,10 +2,12 @@
 
 #### Install docker ######
 
-`sudo apt install docker.io docker-compose`
-`docker version`
-`sudo usermod -a -G docker $USER`
-`docker run hello-world`
+```
+sudo apt install docker.io docker-compose
+docker version
+sudo usermod -a -G docker $USER
+docker run hello-world
+```
 
 *fix: Failed to start docker.service: Unit docker.service is masked.*
 sudo systemctl unmask docker.service
@@ -44,7 +46,7 @@ docker attach `docker ps -q -l` # reattach the terminal & stdin
 
 #### List docker process/log
 
-```
+```bash
 docker ps
 docker ps --filter ancestor=hyperledger/fabric-peer:latest --format '{{.Names}}'
 docker inspect --format="{{.LogPath}}" peer0.org1.example.com
@@ -63,9 +65,14 @@ docker exec -it peer0.org2 bash
 #### Remove container/image/volume
 
 ```bash
-docker rmi -f $(docker images -qa)
 docker rm -f $(docker ps -aq) #ID
 docker rm -f $(sudo -S docker ps -aq  --filter ancestor=redis) #Name
+
+
+docker rmi -f $(docker images -qa)
+docker image prune
+#docker images purge
+
 docker volume ls
 docker volume prune -f
 ```
@@ -93,8 +100,15 @@ docker login repository_details
    ```
    docker-compose down; docker-compose up
    ```
+   
+   #### 
 
+#### Container ID
 
+```
+# Identify the container ID
+CONTAINER_ID=$(docker container ls | grep graph-node | cut -d' ' -f1)
+```
 
 
 

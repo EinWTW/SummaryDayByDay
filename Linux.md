@@ -61,16 +61,15 @@ PATH=$PATH:~/.local/bin
 export PATH="/home/tianwen/.local/share/solana/install/active_release/bin:$PATH"
 
 # My alias:
-alias cdmy="cd $HOME/go/src/github.com/EinWTW && ll"
-alias ssh-enigma="ssh tianwen@enigma.d2.comp.nus.edu.sg"
-alias ssh-sbip="ssh ubuntu@172.25.122.22 -v"
+alias cdmy="cd $HOME/go/src/github.com/wtwinlab && ll"
+
 . "$HOME/.cargo/env"
 
 ```
 
 
 
-#### check system version
+#### System version
 
 ```
 lsb_release -a
