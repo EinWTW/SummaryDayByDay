@@ -18,6 +18,20 @@ sudo systemctl start docker
 //
 sudo screen -ls
 
+#### Run with docker
+
+```
+e.g.
+$ docker run --restart always -d -p 7770-7771:7770-7771 --name conode -v ~/conode_data:/conode_data dedis/conode:latest
+```
+
+#### Mount Point
+
+```
+src/hardhat$ docker run -it -v ./:/share trailofbits/eth-security-toolbox
+
+```
+
 
 
 #### Start container
@@ -44,20 +58,35 @@ docker attach `docker ps -q -l` # reattach the terminal & stdin
 
 
 
-#### List docker process/log
+#### Docker ps
 
 ```bash
 docker ps
 docker ps --filter ancestor=hyperledger/fabric-peer:latest --format '{{.Names}}'
+
+```
+
+#### Docker log
+
+```
+docker logs peer0.org1
+docker logs -f orderer.example.com
+
 docker inspect --format="{{.LogPath}}" peer0.org1.example.com
 docker inspect net_peer0.org1.example.com
 
 
-docker logs peer0.org1
-docker logs -f orderer.example.com
-
 docker exec -it cli bash
 docker exec -it peer0.org2 bash
+```
+
+#### Docker flag 
+
+--rm
+
+```
+--rm is used when you need the container to be deleted after the task
+$ docker --rm
 ```
 
 
@@ -103,11 +132,15 @@ docker login repository_details
    
    #### 
 
-#### Container ID
+#### Container ID/IP
 
 ```
 # Identify the container ID
 CONTAINER_ID=$(docker container ls | grep graph-node | cut -d' ' -f1)
+
+# Identify container IP
+docker inspect   -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' satya5
+
 ```
 
 

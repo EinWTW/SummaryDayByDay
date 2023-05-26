@@ -72,6 +72,12 @@ alias cdmy="cd $HOME/go/src/github.com/wtwinlab && ll"
 #### System version
 
 ```
+uname -a
+```
+
+
+
+```
 lsb_release -a
 ```
 
@@ -512,7 +518,7 @@ wait(NULL)
 ```
 df -h
 
-du -h
+#du -h
 
 du -hd 1
 ```

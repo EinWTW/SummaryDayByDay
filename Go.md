@@ -20,16 +20,34 @@ PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 ```
 
+#### Go Get
+
+- `go get -u ./...` walks all packages in your project. **This is the command you want to use.**
+- `go get -t -u ./...` walks all packages in your project and also downloads tests files of these dependencies. Probably you don’t need that.
+- `go get -u` updates in the current directory only. Useful for small single-package projects, just use the first version.
+- `go get -u specific.com/package` updates just one (or more separated by space) packages (and dependencies).
+- `go get -u specific.com/package@version` the same but to a specific version.
+- `go get -u all` updates modules from the [build list](https://go.dev/ref/mod#glos-build-list) from `go.mod`. This is useful for listing (`go list -m -u all`) but not too useful for updates.
 
 
-#### Go 1.16 requires use of Go modules by default, to still allow working as before
+
+#### Go Mod
+
+###### Go 1.16 requires use of Go modules by default, to still allow working as before
 
 ```
 #export GO111MODULE=off
+#export GO111MODULE=auto
 export GO111MODULE=on
 #export GOFLAGS=-mod=readonly
 export GOFLAGS=-mod=mod
 #export GOFLAGS=-mod=vendor
+#export GOPROXY=on
+export GOPROXY=direct
+#export GOPROXY=off
+#To fix error:0308010C:digital envelope routines::unsupported
+export NODE_OPTIONS=--openssl-legacy-provider
+
 ```
 
 
@@ -65,7 +83,7 @@ go get github.com/EinWTW/hotstuff@veritashs-experiment
 ###### go get all package
 
 ```
-
+go get -u all
 ```
 
 
