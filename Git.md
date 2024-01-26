@@ -160,7 +160,8 @@ git push --delete origin v1.2.1
 
 ```
 
-
+git tag 0427
+git push --tags
 
 
 
@@ -267,13 +268,11 @@ git reset
 #### undo last commit
 git reset --soft HEAD~1
 
-git tag 0427
-git tag
+#### undo revert
 
-git push --tags
+git cherry-pick [original commit sha>]
 
-git push
-git pull
+
 
 -------------------------------------------------
 vim .gitignore 

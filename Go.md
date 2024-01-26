@@ -1,6 +1,13 @@
 # Go
 
+Go was designed to use CPUs efficiently and handle multiple tasks simultaneously. 
+
+Go best fits for server-side applications, backend web development, databases, and network programming as its goroutines can handle many concurrent, independent requests. 
+
+It does not have an extensive library nor support for inheritance. In addition, there is no GUI library or object-oriented programming support. But it has goroutines, strong security, and some standard libraries.
+
 #### GO ENV
+
 ```
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
@@ -33,6 +40,21 @@ PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 #### Go Mod
 
+##### Commands
+
+```
+download    download modules to local cache
+edit        edit go.mod from tools or scripts
+graph       print module requirement graph
+init        initialize new module in current directory
+tidy        add missing and remove unused modules
+vendor      make vendored copy of dependencies
+verify      verify dependencies have expected content
+why         explain why packages or modules are needed
+```
+
+##### Functions
+
 ###### Go 1.16 requires use of Go modules by default, to still allow working as before
 
 ```
@@ -49,8 +71,6 @@ export GOPROXY=direct
 export NODE_OPTIONS=--openssl-legacy-provider
 
 ```
-
-
 
 ###### update go.mod
 
@@ -124,3 +144,30 @@ The -u flag instructs get to use the network to update the named packages and th
 
 The -v flag enables verbose progress and debug output.
 
+#### Go Routines and channels
+
+[Go](https://www.simplilearn.com/go-programming-language-article) offers subprograms to run their actions simultaneously with the help of Concurrency. It doesn't follow the threading model for concurrency; it follows the *Communicating Sequential Processes(CSP) model*. Go supports concurrency with goroutines and channels. 
+
+Goroutines are inexpensive compared to threads. A goroutine is a lightweight thread managed by the Go runtime. 
+
+Goroutines are lightweight, call fewer resources, and are executed independently.
+
+Goroutines communicate with other elements through channels.
+
+###### Channels
+
+Channels can be thought of as a passage through which Goroutines communicate. The channel is defined using the make function and the chan keyword. Each channel has a specified type defined with it. This type of data is only allowed to be transported by the channel. 
+
+###### Concurrency vs Parallelism
+
+Parallelism doesn't always result in faster execution time. In Parallelism, actions are performed parallely in multiple cores, creating the need for components to communicate with each other.
+
+#### Multiple Interfaces
+
+A type can implement multiple interfaces.
+
+
+
+#### Type Assertion
+
+the dynamic value of an interface using the syntax i.(Type), where i is a variable of type interface and Type is a type that implements the interface.

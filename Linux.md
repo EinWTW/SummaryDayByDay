@@ -103,6 +103,46 @@ to reboot in 40 minutes
 sudo shutdown -r +40
 ```
 
+#### Mem ####
+
+`$ top`
+
+`$ htop`
+
+`pwdx 命令根据 pid 找到业务进程路径，进而定位到负责人和项目`
+
+`dmesg -T | grep 'Out of memory'`
+
+`$ vmstat -s #cat /proc/meminfo`
+
+`$ sudo -i`
+
+`$ chmod -R +w,g=rw,o-rw,` 
+
+`#drwxrwsrwx`
+
+`$ chmod -R 2777 trading-system.git/`
+
+`$ mv old_name new_name #rename a file or directory
+
+`$ sudo apt-get -q -y -f build-dep` 
+
+`$ sudo gparted`
+
+`$ sudo fdisk -l`
+
+#### Disk usage
+
+```
+df -h
+
+#du -h
+
+du -hd 1
+```
+
+
+
 #### Debugfs
 
 ```
@@ -417,7 +457,7 @@ pkill -f [part_of_a_command_name]
 
 
 
-#### Run background
+#### Run **B**ackground
 
 ```
 nuhup ./script.sh &
@@ -484,44 +524,6 @@ cash
 setbuf(stdout, NULL)
 
 wait(NULL)
-
-#### Mem ####
-
-`$ top`
-
-`$ htop`
-
-`pwdx 命令根据 pid 找到业务进程路径，进而定位到负责人和项目`
-
-`dmesg -T | grep 'Out of memory'`
-
-`$ vmstat -s #cat /proc/meminfo`
-
-`$ sudo -i`
-
-`$ chmod -R +w,g=rw,o-rw,` 
-
-`#drwxrwsrwx`
-
-`$ chmod -R 2777 trading-system.git/`
-
-`$ mv old_name new_name #rename a file or directory
-
-`$ sudo apt-get -q -y -f build-dep` 
-
-`$ sudo gparted`
-
-`$ sudo fdisk -l`
-
-#### Disk usage
-
-```
-df -h
-
-#du -h
-
-du -hd 1
-```
 
 
 
