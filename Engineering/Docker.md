@@ -1,4 +1,4 @@
-# docker
+docker
 
 #### Install docker ######
 
@@ -66,6 +66,52 @@ docker ps --filter ancestor=hyperledger/fabric-peer:latest --format '{{.Names}}'
 
 ```
 
+#### Docker exec
+
+```
+docker exec -it hbdb bash
+```
+
+
+
+#### Docker Metrics
+
+```
+ docker stats redis1 redis2
+```
+
+#### Docker Tag
+
+ tag your image correctly first with your registryhost:
+
+```
+docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
+docker tag hbdb-eth tianwenw/hbdb-eth
+docker tag blockchaindb tianwenw/blockchaindb:v1.0.0
+
+docker build -t tianwenw/hbdb:raft .
+docker build --no-cache -f ${dir}/Dockerfile -t tianwenw/hbdb:eth ${dir}/
+```
+
+#### Docker Push
+
+Then docker push using that same tag.
+
+```
+docker push NAME[:TAG]
+docker push tianwenw/hbdb:1.0
+docker push tianwenw/hbdb:eth
+```
+
+Fix access denied, use the below commands to tag and push your image to repository:
+
+```
+docker logout                                   # to make sure you're logged out and not cause any clashes
+docker tag <imageId> myusername/docker-whale    # use :1.0.0 for specific version, default is 'latest'
+docker login --username=myusername              # use the username/pwd to login to docker hub
+docker push myusername/docker-whale             # use :1.0.0 for pushing specific version, default is 'latest'
+```
+
 #### Docker log
 
 ```
@@ -91,7 +137,17 @@ $ docker --rm
 
 
 
-#### Remove container/image/volume
+#### Docker Prune
+
+```
+docker container prune
+```
+
+
+
+#### Docker Remove 
+
+Remove container/image/volume
 
 ```bash
 docker rm -f $(docker ps -aq) #ID
@@ -112,6 +168,7 @@ docker volume prune -f
 
 ```
 docker login repository_details
+docker login --username=tianwenw
 ```
 
 
@@ -132,6 +189,22 @@ docker login repository_details
    
    #### 
 
+#### Docker network
+
+```
+docker network inspect bridge
+
+172.17.0.1
+curl --location --request POST 'localhost:2221/raft/join' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"node_id": "node_2", 
+	"raft_address": "172.17.0.1:1112"
+}'
+```
+
+
+
 #### Container ID/IP
 
 ```
@@ -142,6 +215,20 @@ CONTAINER_ID=$(docker container ls | grep graph-node | cut -d' ' -f1)
 docker inspect   -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' satya5
 
 ```
+
+
+
+#### Docker redis
+
+```
+docker pull redis
+docker run -it --name hbdb-redis -d redis
+docker logs hbdb-redis
+docker exec -it hbdb-redis bash
+
+```
+
+
 
 
 

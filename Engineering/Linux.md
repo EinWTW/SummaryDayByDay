@@ -67,6 +67,12 @@ alias cdmy="cd $HOME/go/src/github.com/wtwinlab && ll"
 
 ```
 
+bash
+
+```
+$@ is all of the parameters passed to the script.
+```
+
 
 
 #### System version
